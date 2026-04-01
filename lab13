@@ -1,0 +1,43 @@
+CloudSim is a simulation toolkit used to model and simulate cloud computing environments. It
+helps in analyzing resource allocation, scheduling algorithms, and performance without using real
+cloud infrastructure.
+
+Procedure
+1. Install Java (JDK 1.8).
+2. Set Java environment variables.
+3. Download and install Eclipse IDE.
+4. Download CloudSim package and extract it.
+5. Download required jar files (commons-math3).
+6. Add all jar files to Eclipse project.
+7. Create a new Java project.
+8. Create a new class inside src folder.
+9. Write CloudSim simulation program.
+10. Run the program in Eclipse.
+
+Program
+package cloudsimproject;
+import org.cloudbus.cloudsim.*;
+import org.cloudbus.cloudsim.core.CloudSim;
+import org.cloudbus.cloudsim.provisioners.*;
+import java.util.*;
+public class Test {
+ public static void main(String[] args) throws Exception {
+ CloudSim.init(1, Calendar.getInstance(), false);
+ Pe pe = new Pe(0, new PeProvisionerSimple(1000));
+ Host host = new Host(0,
+ new RamProvisionerSimple(2048),
+Cloud Computing Lab Page No…
+ new BwProvisionerSimple(10000),
+ 1000000,
+ Arrays.asList(pe),
+ new VmSchedulerSpaceShared(Arrays.asList(pe)));
+ Datacenter dc = new Datacenter("DC",
+ new DatacenterCharacteristics("x86", "Linux", "Xen",
+ Arrays.asList(host), 10, 3, 0.05, 0.1, 0),
+ new VmAllocationPolicySimple(Arrays.asList(host)),
+ new LinkedList<Storage>(), 0);
+ DatacenterBroker broker = new DatacenterBroker("Broker");
+ CloudSim.startSimulation();
+ CloudSim.stopSimulation();
+ }
+}
