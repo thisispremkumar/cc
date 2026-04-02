@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main()
+{
+    char *str = "Hello World";
+    int i = 0;
+
+    printf("Original String: %s\n", str);
+
+    printf("\nChar\tAND Result\tXOR Result\n");
+    printf("--------------------------------------\n");
+
+    while (str[i] != '\0')
+    {
+        char andResult = str[i] & 127;
+        int xorResult = str[i] ^ 127;
+
+        printf("%c\t%c\t\t%d\n", str[i], andResult, xorResult);
+        i++;
+    }
+
+    return 0;
+}
